@@ -1,27 +1,38 @@
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 function App() {
-  const [names, setNames] = useState(['홍길동'])
-  const [input, setInput] = useState('')
+  const [count, setCount] = useState(1)
+  const [name, setName] = useState('')
+
+  const handleCountUpdate = () => {
+    setCount(count + 1)
+  }
 
   const handleInputChange = (e) => {
-    setInput(e.target.value)
+    setName(e.target.value)
   }
 
-  const handleUpload = () => {
-    setNames((prevState) => {
-      return [input, ...prevState]
-    })
-    setInput('')
-  }
+  // 마운트 + [ item ] 변경될 때만 실행.
+  // useEffect(() => {
+  //   console.log('랜더링 🙌🏻')
+  // })
+  // //
+  // useEffect(() => {
+  //   console.log('이름변경 🙌🏻')
+  // }, [name])
+  // useEffect(() => {
+  //   console.log('카운트변경 🙌🏻')
+  // }, [count])
+  useEffect(() => {
+    console.log('처음에만 🙌🏻')
+  }, [])
 
   return (
     <>
-      <input type="text" value={input} onChange={handleInputChange} />
-      <button onClick={handleUpload}>Upload</button>
-      {names.map((name, idx) => {
-        return <p key={idx}>{name}</p>
-      })}
+      <button onClick={handleCountUpdate}>Update</button>
+      <p>count: {count}</p>
+      <input type="text" value={name} onChange={handleInputChange} />
+      <p>name: {name}</p>
     </>
   )
 }
