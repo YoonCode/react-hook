@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
+import Timer from './component/Timer'
 
 const App = () => {
-  const [count, setCount] = useState(0)
-
-  const handleClick = () => {
-    setCount(count + 1)
-  }
-
+  const [showTimer, setShowTimer] = useState(false)
   return (
     <>
-      <p>Count: {count}</p>
-      <button onClick={handleClick}>Touch</button>
+      {showTimer && <Timer />}
+      <button
+        onClick={() => {
+          setShowTimer(!showTimer)
+        }}
+      >
+        Toggle Timer
+      </button>
     </>
   )
 }
