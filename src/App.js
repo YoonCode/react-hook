@@ -1,12 +1,27 @@
-import React, { useState, useEffect } from 'react'
-import Timer from './component/Timer'
+import React, { useState, useRef } from 'react'
 
-function App() {
-  const [showTimer, setShowTimer] = useState(false)
+const App = () => {
+  const [count, setCount] = useState(0)
+  const countRef = useRef(0)
+
+  console.log('랜더링...')
+  // console.log(countRef) // countRef.current
+
+  const increaseCountState = () => {
+    setCount(count + 1)
+  }
+
+  const increaseCountRef = () => {
+    countRef.current = countRef.current + 1
+    console.log('Ref: ', countRef.current)
+  }
+
   return (
     <>
-      {showTimer && <Timer />}
-      <button onClick={() => setShowTimer(!showTimer)}>Toggle Timer</button>
+      <p>State: {count}</p>
+      <p>Ref: {countRef.current}</p>
+      <button onClick={increaseCountState}>State 올려</button>
+      <button onClick={increaseCountRef}>Ref 올려</button>
     </>
   )
 }
