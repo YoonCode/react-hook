@@ -10,6 +10,8 @@ const App = () => {
 
   const login = () => {
     alert(`환영합니다! ${inputRef.current.value}님!`)
+    inputRef.current.value = ''
+    inputRef.current.focus()
   }
 
   return (
