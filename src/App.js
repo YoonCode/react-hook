@@ -1,19 +1,21 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 const App = () => {
-  const [count, setCount] = useState(1)
-  const renderCount = useRef(1)
+  const inputRef = useRef()
 
   useEffect(() => {
-    // 랜더링을 발생시키면 안되는 경우에 useRef 가 유용함.
-    console.log('랜더링 수: ', renderCount.current)
-    renderCount.current += 1
-  })
+    // console.log(inputRef)
+    inputRef.current.focus()
+  }, [])
+
+  const login = () => {
+    alert(`환영합니다! ${inputRef.current.value}님!`)
+  }
 
   return (
     <>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>올려</button>
+      <input ref={inputRef} type="text" placeholder="username" />
+      <button onClick={login}>로그인</button>
     </>
   )
 }
