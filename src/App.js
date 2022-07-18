@@ -1,30 +1,38 @@
 import React, { useState, useRef } from 'react'
 
 const App = () => {
-  const [count, setCount] = useState(0)
+  const [renderer, setRenderer] = useState(0)
   const countRef = useRef(0)
+  let countVar = 0
 
-  // console.log(countRef) // countRef.current
-
-  console.log('랜더링...')
-
-  const increaseCountState = () => {
-    // state 값이 변할 때마다 랜더링이 일어남.
-    setCount(count + 1)
+  const doRendering = () => {
+    setRenderer(renderer + 1)
   }
 
-  const increaseCountRef = () => {
-    // ref 값이 변해도 랜더링이 일어나지 않음. 하지만 전 생애주기 동안 값을 유지함.
+  const increaseRef = () => {
+    // ref 값은 함수가 재실행되어도 유지됨.
     countRef.current += 1
     console.log('Ref: ', countRef.current)
   }
 
+  const increaseVar = () => {
+    // var 값은 함수가 재실행되면 초기화됨.
+    countVar += 1
+    console.log('Var: ', countVar)
+  }
+
+  const printResults = () => {
+    console.log(`ref: ${countRef.current}, var: ${countVar}`)
+  }
+
   return (
     <>
-      <p>State: {count}</p>
       <p>Ref: {countRef.current}</p>
-      <button onClick={increaseCountState}>State 올려</button>
-      <button onClick={increaseCountRef}>Ref 올려</button>
+      <p>Var: {countVar}</p>
+      <button onClick={doRendering}>랜더!!</button>
+      <button onClick={increaseRef}>Ref 올려</button>
+      <button onClick={increaseVar}>Var 올려</button>
+      <button onClick={printResults}>Ref Var 값 출력</button>
     </>
   )
 }
