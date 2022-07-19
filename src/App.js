@@ -4,7 +4,10 @@ const App = () => {
   const [number, setNumber] = useState(0)
   const [isKorea, setIsKorea] = useState(true)
 
-  const location = isKorea ? '한국' : '외국'
+  // const location = isKorea ? '한국' : '외국'
+  const location = {
+    country: isKorea ? '한국' : '외국',
+  }
 
   useEffect(() => {
     console.log('useEffect 호출')
@@ -20,7 +23,7 @@ const App = () => {
       />
       <hr />
       <h2>어느 나라에 있어요?</h2>
-      <p>나라: {location}</p>
+      <p>나라: {location.country}</p>
       <button onClick={() => setIsKorea(!isKorea)}>비행기 타자</button>
     </div>
   )
