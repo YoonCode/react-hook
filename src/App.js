@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 
 const hardCalculate = (number) => {
   console.log('어려운 계산!')
@@ -14,7 +14,10 @@ const App = () => {
   const [hardNumber, setHardNumber] = useState(1)
   const [easyNumber, setEasyNumber] = useState(1)
 
-  const hardSum = hardCalculate(hardNumber)
+  // const hardSum = hardCalculate(hardNumber)
+  const hardSum = useMemo(() => {
+    return hardCalculate(hardNumber)
+  }, [hardNumber])
   const easySum = easyCalculate(easyNumber)
 
   return (
