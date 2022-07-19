@@ -1,13 +1,20 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 
 const App = () => {
   const [number, setNumber] = useState(0)
   const [isKorea, setIsKorea] = useState(true)
 
   // const location = isKorea ? '한국' : '외국'
-  const location = {
-    country: isKorea ? '한국' : '외국',
-  }
+
+  // const location = {
+  //   country: isKorea ? '한국' : '외국',
+  // }
+
+  const location = useMemo(() => {
+    return {
+      country: isKorea ? '한국' : '외국',
+    }
+  }, [isKorea])
 
   useEffect(() => {
     console.log('useEffect 호출')
