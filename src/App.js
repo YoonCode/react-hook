@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 
 const App = () => {
   const [number, setNumber] = useState(0)
+  const [toggle, setToggle] = useState(true)
 
   // someFunction에 할당된 함수(객체)의 주소는 리렌더링될 때마다 바뀜.(재사용 안됨.)
   // const someFunction = () => {
@@ -26,6 +27,7 @@ const App = () => {
         value={number}
         onChange={(e) => setNumber(e.target.value)}
       />
+      <button onClick={() => setToggle(!toggle)}>{toggle.toString()}</button>
       <br />
       <button onClick={someFunction}>Call someFunc</button>
     </div>
