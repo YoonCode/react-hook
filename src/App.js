@@ -4,12 +4,17 @@ import React, { useState, useReducer } from 'react'
 // dispatch : state 업데이트를 위한 요청
 // action : state 요청 내용
 
+const ACTION_TYPES = {
+  deposit: 'deposit',
+  withdraw: 'withdraw',
+}
+
 const reducer = (state, action) => {
   console.log('reducer가 일을 합니다!', state, action)
   switch (action.type) {
-    case 'deposit':
+    case ACTION_TYPES.deposit:
       return state + action.payload
-    case 'withdraw':
+    case ACTION_TYPES.withdraw:
       return state - action.payload
     default:
       return state
@@ -34,14 +39,14 @@ const App = () => {
       />
       <button
         onClick={() => {
-          dispatch({ type: 'deposit', payload: number })
+          dispatch({ type: ACTION_TYPES.deposit, payload: number })
         }}
       >
         예금
       </button>
       <button
         onClick={() => {
-          dispatch({ type: 'withdraw', payload: number })
+          dispatch({ type: ACTION_TYPES.withdraw, payload: number })
         }}
       >
         출금
