@@ -1,35 +1,38 @@
-import React, { useState, useCallback } from 'react'
-import Box from './Box'
+import React, { useState, useReducer } from 'react'
+
+// reducer : state를 업데이트 하는 역할
+// dispatch : state 업데이트를 위한 요청
+// action : state 요청 내용
+
+const reducer = (state, action) => {
+  console.log('reducer가 일을 합니다!', state, action)
+  return state + action.payload
+}
 
 const App = () => {
-  const [size, setSize] = useState(100)
-  const [isDark, setIsDark] = useState(false)
-
-  const createBoxStyle = useCallback(() => {
-    return {
-      backgroundColor: 'pink',
-      width: `${size}px`,
-      height: `${size}px`,
-    }
-  }, [size])
+  const [number, setNumber] = useState(0)
+  const [money, dispatch] = useReducer(reducer, 0)
 
   return (
-    <div style={{ background: isDark ? 'black' : 'white' }}>
+    <div>
+      <h2>useReducer 은행에 오신 것을 환영합니다!</h2>
+      <p>잔고: {money}원</p>
       <input
         type="number"
-        value={size}
+        value={number}
         onChange={(e) => {
-          setSize(e.target.value)
+          setNumber(parseInt(e.target.value))
         }}
+        step="1000"
       />
       <button
         onClick={() => {
-          setIsDark(!isDark)
+          dispatch({ type: 'deposit', payload: number })
         }}
       >
-        Change Theme
+        예금
       </button>
-      <Box createBoxStyle={createBoxStyle} />
+      <button>출금</button>
     </div>
   )
 }
