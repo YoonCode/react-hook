@@ -6,7 +6,14 @@ import React, { useState, useReducer } from 'react'
 
 const reducer = (state, action) => {
   console.log('reducer가 일을 합니다!', state, action)
-  return state + action.payload
+  switch (action.type) {
+    case 'deposit':
+      return state + action.payload
+    case 'withdraw':
+      return state - action.payload
+    default:
+      return state
+  }
 }
 
 const App = () => {
@@ -32,7 +39,13 @@ const App = () => {
       >
         예금
       </button>
-      <button>출금</button>
+      <button
+        onClick={() => {
+          dispatch({ type: 'withdraw', payload: number })
+        }}
+      >
+        출금
+      </button>
     </div>
   )
 }
